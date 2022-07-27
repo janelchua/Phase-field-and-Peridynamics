@@ -1,7 +1,6 @@
 function [R] = peri103_3(N,B,I,delta_x,M,rho,L0,a,x,v,E1,E2,E3,c1,c2,c3,gamma_M,gamma_m)
 
 V=a(1:(N));
-%V(ceil(N/2)) = 0;% Fixing V(x = xx) =  0 where xx is the position of the strain discontinuity
 
 residual = 0;
 %%
