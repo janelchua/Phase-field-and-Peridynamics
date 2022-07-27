@@ -47,12 +47,9 @@ ff = zeros(3,length(M3)) %3 cause 3 different values of v
 %%
 for k = 1:length(v)   
     for p = 1:length(M3)
+    
         %% Initial Conditions
         u05 = zeros(1,N);
-%         left_all = 0.6151;%
-%         right_all = 3.186;%
-%         left = left_all(p) ;
-%         right = right_all(p) ; 
         left = (((10*4)^0.5)/10) ;
         right = (((10*4)^0.5)/2) ;
         CCC = left*(L/2); 
@@ -68,10 +65,6 @@ for k = 1:length(v)
 
         %% Solving
         [F] =  @(u) peri103_3(N,B,I,delta_x,M3(p),rho,L0,u,x,v(k),E1,E2,E3,c1,c2,c3,gamma_M,gamma_m)
-        %% fminunc
-        %         options = optimoptions('fminunc','Display','iter','MaxFunctionEvaluations',6000000,'MaxIterations',1000); %MaxFunctionEvaluations refers to F... It will call F that many times max
-        %         [disp,FF] = fminunc(F,u05, options);
-        %% fmincon
         A = [];
         zcol = zeros(N,1);
         A1 = -1*eye(N,N);
@@ -82,20 +75,11 @@ for k = 1:length(v)
         b = zeros(N,1);
         
         Aeq = zeros(N,N);
-        %Aeq(:,ceil(N/2)) =1;
-        %Aeq(1,:) = 1
         beq = zeros(N,1);
         
-        %nonlcon = @(U,n) test(U,n);
         options = optimoptions('fmincon','Display','iter','MaxFunctionEvaluations',6000000,'MaxIterations',5000); %MaxFunctionEvaluations refers to F... It will call F that many times max
-        %[disp,FF] = fmincon(F,u05,[],[],Aeq,beq,[],[],[],options);
         [disp,FF] = fmincon(F,u05,[],[],[],[],[],[],[], options);
-        %% patternsearch
-        %         [disp,FF] = patternsearch(F,u05);
-        %% fminsearch
-        %         options = optimset('MaxFunEvals',500000,'MaxIter',5000); %MaxFunctionEvaluations refers to F... It will call F that many times max
-        %         [disp] = fminsearch(F,u05,options);
-        %%
+
         if v(k)==v(1)
             displStore1(p,1:N) = disp(1:N);
             R1(p,1) = FF;
@@ -106,9 +90,7 @@ for k = 1:length(v)
             displStore003(p,1:N) = disp(1:N);
             R003(p,1) = FF;
         end
-        %u05 = disp
-        %% Gamma
-        %for p = 1:length(M3)
+
         gamma1 = zeros(1,size(disp,2)); %gamma
         gamma03 = zeros(1,size(disp,2)); %gamma
         gamma003 = zeros(1,size(disp,2)); %gamma
