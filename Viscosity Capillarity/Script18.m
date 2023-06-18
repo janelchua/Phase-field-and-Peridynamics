@@ -228,8 +228,8 @@ figure(JJ)
 box on
 grid on
 hold on
-plot(M_a1,f_a1,'k-','linewidth',1)
-plot(M_a2,f_a2,'k-','linewidth',1)
+plot(M_a1,f_a1,'k-','linewidth',1) %Line at the boundary of the admissible region
+plot(M_a2,f_a2,'k-','linewidth',1) %Line at the boundary of the admissible region
 plot(linspace(-100,100,10),zeros(10),'k--','linewidth',1)
 plot(zeros(10),linspace(-100,100,10),'k--','linewidth',1)
 
